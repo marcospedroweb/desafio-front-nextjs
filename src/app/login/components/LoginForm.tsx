@@ -66,6 +66,7 @@ const LoginForm = () => {
               icon={<FaUser className="text-gray-600" />}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              classNameDiv="mb-3"
               required
             />
             <Input
@@ -74,6 +75,7 @@ const LoginForm = () => {
               icon={<FaUnlockAlt className="text-gray-600" />}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              classNameDiv="mb-3"
               required
             />
             <div className="flex justify-between items-center w-[90%] mx-auto">
