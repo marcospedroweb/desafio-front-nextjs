@@ -6,8 +6,6 @@ export async function GET(req: NextRequest) {
   try {
     const authHeader = req.headers.get('authorization');
     const token = authHeader?.split(' ')[1];
-    console.log(authHeader)
-    console.log(token)
 
     if (!token) {
       return NextResponse.json({ status: 0, message: 'Não autorizado' }, { status: 401 });
