@@ -10,14 +10,16 @@ import Filter from './Filter';
 import { useEffect, useMemo, useState } from 'react';
 import { useDebounce } from '@/app/hooks/useDebounce';
 import ProdutosPagination from './ProdutosPagination';
+import useSavedProducts from '@/app/hooks/useSavedProducts';
 
 const ProdutosGrid = () => {
   const [searchValue, setSearchValue] = useState('');
   const [order, setOrder] = useState('');
   const debouncedSearch = useDebounce(searchValue, 500);
   const [actualPage, setActualPage] = useState<number>(1);
+  const { isSaved } = useSavedProducts();
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
 
   const { data: produtos = [], isLoading } = useQuery<Produto[], Error>({
     queryKey: ['produtos', debouncedSearch],
@@ -42,6 +44,10 @@ const ProdutosGrid = () => {
   const sortedProdutos = useMemo(() => {
     const sorted = [...produtos];
 
+    if (order === 'favorites') {
+      return sorted.filter((produto: Produto) => isSaved(produto.codigo));
+    }
+
     switch (order) {
       case 'price_asc':
         sorted.sort((a, b) => Number(a.preco) - Number(b.preco));
@@ -53,6 +59,9 @@ const ProdutosGrid = () => {
         sorted.sort((a, b) => a.nome.localeCompare(b.nome));
         break;
       case 'name_desc':
+        sorted.sort((a, b) => b.nome.localeCompare(a.nome));
+        break;
+      case 'favorites':
         sorted.sort((a, b) => b.nome.localeCompare(a.nome));
         break;
     }
@@ -78,7 +87,7 @@ const ProdutosGrid = () => {
   }, [sortedProdutos, actualPage]);
 
   return (
-    <div className="max-w-10/12 mx-auto">
+    <div className="max-w-10/12 mx-auto mb-44">
       <Filter
         search={searchValue}
         setSearch={setSearchValue}
@@ -87,9 +96,10 @@ const ProdutosGrid = () => {
       />
 
       <p className="text-end text-xl mt-2 mb-4 font-medium">
-        {produtos.length} produtos encontrados
+        {totalPages > 1 ? produtos.length : paginatedProdutos.length} produtos
+        encontrados
       </p>
-      <div className="flex justify-between items-start flex-wrap gap-5">
+      <div className={`flex justify-start items-start flex-wrap gap-6`}>
         {isLoading
           ? Array.from({ length: 6 }).map((_, i) => (
               <ProdutoCardSkeleton key={i} />
