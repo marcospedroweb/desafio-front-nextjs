@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
-import ListProdutos from './components/ProdutosGrid';
+import ProdutosGrid from './components/ProdutosGrid';
 import Header from '../components/Header';
 
 export default function ProdutosPage() {
@@ -9,7 +9,7 @@ export default function ProdutosPage() {
   return (
     <main>
       <Header />
-      <ListProdutos />
+      <ProdutosGrid />
     </main>
   );
 }
