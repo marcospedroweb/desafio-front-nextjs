@@ -10,7 +10,7 @@ npm run start
 
 ## Variáveis de ambiente
 
-- Configure .env com base no [.env.example](.env.example)
+- Configure .env com base no [.env.example](.env.example); usando a rota da API
 
 ## Decisões técnicas e Pendências
 
