@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
 interface ColorPickerProps {
-  colors: string[];
+  colors?: string[];
   onSelect?: (color: string) => void;
 }
 
-const ColorPicker = ({ colors, onSelect }: ColorPickerProps) => {
+const colorsPicker = [
+  '#7d2e27',
+  '#32619d',
+  '#4b5d74',
+  '#5a9ec1',
+  '#7fbb02',
+  '#424242',
+  '#eeeeee',
+  '#8a2b0f',
+  '#64f735',
+  '#0fe8b8',
+  '#5a9ec0',
+  '#ff6100',
+  '#ffaf01',
+  '#2e1e41',
+];
+
+const ColorPicker = ({ colors = colorsPicker, onSelect }: ColorPickerProps) => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const handleSelect = (color: string) => {
