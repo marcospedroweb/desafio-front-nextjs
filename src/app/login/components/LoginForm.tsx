@@ -51,7 +51,8 @@ const LoginForm = () => {
 
   return (
     <form
-      className="relative z-10 flex flex-col items-center justify-center min-h-screen max-w-xl mx-auto"
+      className="relative z-10 flex flex-col items-center justify-center 
+        min-h-screen px-4 sm:px-8 py-8"
       onSubmit={handleSubmit}
     >
       <div className="w-full text-center">
@@ -78,7 +79,7 @@ const LoginForm = () => {
               classNameDiv="mb-3"
               required
             />
-            <div className="flex justify-between items-center w-[90%] mx-auto">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-0 items-start md:justify-between md:items-center w-[90%] mx-auto">
               <div>
                 <input
                   type="checkbox"
@@ -91,7 +92,7 @@ const LoginForm = () => {
                   <small>Manter logado</small>
                 </label>
               </div>
-              <small>Esqueceu a password?</small>
+              <small>Esqueceu a senha?</small>
             </div>
             <Button
               text={'Login'}
