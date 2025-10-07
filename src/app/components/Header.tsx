@@ -16,38 +16,34 @@ const Header = () => {
     setLoading(false);
   }, [loadFromStorage]);
 
-  if (loading) return null;
+  return (
+    <header className="bg-[#8EC605] py-2 mt-8">
+      <div className="max-w-8/12 flex justify-between items-center mx-auto">
+        <h1 className="sr-only">Innovation Brindes</h1>
+        <Image
+          src={'/assets/logo_innovation.png'}
+          width={151}
+          height={66}
+          alt="logo Innovation Brindes"
+        />
+        <div className="flex justify-center items-center gap-6">
+          <div className="relative inline-block">
+            <MdEmail className="text-white text-3xl" />
+            <span className="absolute -top-1 -right-4 flex items-center justify-center w-5 h-5 text-xs font-bold text-[#8EC605] bg-white rounded-full shadow-md">
+              {user ? '11' : '0'}
+            </span>
+          </div>
 
-  if (!user) return null;
+          <div className="relative inline-block">
+            <FaPhone className="text-white text-2xl" />
+            <span className="absolute -top-1 -right-4 flex items-center justify-center w-5 h-5 text-xs font-bold text-[#8EC605] bg-white rounded-full shadow-md">
+              {user ? '11' : '0'}
+            </span>
+          </div>
 
-  if (user)
-    return (
-      <header className="bg-[#8EC605] py-2 mt-8">
-        <div className="max-w-8/12 flex justify-between items-center mx-auto">
-          <h1 className="sr-only">Innovation Brindes</h1>
-          <Image
-            src={'/assets/logo_innovation.png'}
-            width={151}
-            height={66}
-            alt="logo Innovation Brindes"
-          />
-          <div className="flex justify-center items-center gap-6">
-            <div className="relative inline-block">
-              <MdEmail className="text-white text-3xl" />
-              <span className="absolute -top-1 -right-4 flex items-center justify-center w-5 h-5 text-xs font-bold text-[#8EC605] bg-white rounded-full shadow-md">
-                11
-              </span>
-            </div>
-
-            <div className="relative inline-block">
-              <FaPhone className="text-white text-2xl" />
-              <span className="absolute -top-1 -right-4 flex items-center justify-center w-5 h-5 text-xs font-bold text-[#8EC605] bg-white rounded-full shadow-md">
-                11
-              </span>
-            </div>
-
-            <div className="flex justify-start items-center gap-4">
-              <div className="border-6 border-white rounded-full">
+          <div className="flex justify-start items-center gap-4">
+            <div className="border-6 border-white rounded-full">
+              {user ? (
                 <Image
                   src="/assets/user_photo.jpg"
                   width={48}
@@ -55,16 +51,28 @@ const Header = () => {
                   className="rounded-full"
                   alt="photo do usuario"
                 />
-              </div>
-              <div className="flex flex-col text-white">
-                <p className="montserrat">{user}</p>
-                <p className="text-[12px]">{formatDate(new Date())}</p>
-              </div>
+              ) : (
+                <div className="w-12 h-12 bg-white/30 rounded-full animate-pulse" />
+              )}
+            </div>
+            <div className="flex flex-col text-white">
+              {user ? (
+                <>
+                  <p className="montserrat">{user}</p>
+                  <p className="text-[12px]">{formatDate(new Date())}</p>
+                </>
+              ) : (
+                <>
+                  <div className="w-24 h-4 bg-white/30 rounded animate-pulse mb-1" />
+                  <div className="w-16 h-3 bg-white/30 rounded animate-pulse" />
+                </>
+              )}
             </div>
           </div>
         </div>
-      </header>
-    );
+      </div>
+    </header>
+  );
 };
 
 export default Header;
