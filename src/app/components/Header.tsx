@@ -4,13 +4,16 @@ import { formatDate } from '@/utils/formatDate';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { FaPhone } from 'react-icons/fa6';
-import { MdEmail } from 'react-icons/md';
+import { MdEmail, MdLogout } from 'react-icons/md';
 import { useAuthRedirect } from '../hooks/useAuthRedirect';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const user: User | string | null = useUserStore((state) => state.user);
   const loadFromStorage = useUserStore((state) => state.loadFromStorage);
+  const logout = useUserStore((state) => state.logout);
   const [, setLoading] = useState(true);
+  const navigate = useRouter();
 
   useAuthRedirect();
 
@@ -26,7 +29,7 @@ const Header = () => {
 
   return (
     <header className="bg-[#8EC605] py-2 mt-8">
-      <div className="max-w-8/12 flex flex-col md:flex-row justify-between items-center mx-auto">
+      <div className="max-w-10/12 flex flex-col md:flex-row justify-between items-center mx-auto">
         <h1 className="sr-only">Innovation Brindes</h1>
         <Image
           src={'/assets/logo_innovation.png'}
@@ -75,6 +78,14 @@ const Header = () => {
                   <div className="w-16 h-3 bg-white/30 rounded animate-pulse" />
                 </>
               )}
+            </div>
+            <div
+              onClick={() => {
+                logout();
+                navigate.push('/login');
+              }}
+            >
+              <MdLogout className="text-white text-2xl cursor-pointer" />
             </div>
           </div>
         </div>
