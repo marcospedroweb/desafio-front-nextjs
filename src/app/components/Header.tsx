@@ -1,13 +1,13 @@
 'use client';
-import { useUserStore } from '@/lib/store';
+import { useUserStore, type User } from '@/lib/store';
 import { formatDate } from '@/utils/formatDate';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
 const Header = () => {
-  const user = useUserStore((state) => state.user);
+  const user: User | string | null = useUserStore((state) => state.user);
   const loadFromStorage = useUserStore((state) => state.loadFromStorage);
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +15,11 @@ const Header = () => {
     loadFromStorage();
     setLoading(false);
   }, [loadFromStorage]);
+
+  const userName =
+    typeof user === 'string'
+      ? user
+      : (user as unknown as User)?.nome_usuario ?? '';
 
   return (
     <header className="bg-[#8EC605] py-2 mt-8">
@@ -58,7 +63,7 @@ const Header = () => {
             <div className="flex flex-col text-white">
               {user ? (
                 <>
-                  <p className="montserrat">{user}</p>
+                  <p className="montserrat">{userName}</p>
                   <p className="text-[12px]">{formatDate(new Date())}</p>
                 </>
               ) : (

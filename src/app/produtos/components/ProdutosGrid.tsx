@@ -33,7 +33,7 @@ const ProdutosGrid = () => {
       } catch (error: unknown) {
         const message =
           error instanceof Error ? error.message : 'Erro desconhecido';
-        toast.error(message);
+
         throw error;
       }
     },
