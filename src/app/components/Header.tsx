@@ -56,7 +56,7 @@ const Header = () => {
             <div className="border-6 border-white rounded-full">
               {user ? (
                 <Image
-                  src="/assets/user_photo.jpg"
+                  src="/assets/user_photo.webp"
                   width={48}
                   height={48}
                   className="rounded-full"

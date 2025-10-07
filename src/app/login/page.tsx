@@ -12,7 +12,7 @@ export default function LoginPage() {
       className="w-full min-h-screen bg-cover bg-no-repeat relative 
         flex items-center justify-center"
       style={{
-        backgroundImage: "url('/assets/login_banner.jpg')",
+        backgroundImage: "url('/assets/login_banner.webp')",
         backgroundPosition: 'center',
       }}
     >
