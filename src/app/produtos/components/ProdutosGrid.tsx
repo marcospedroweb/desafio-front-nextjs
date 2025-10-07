@@ -9,32 +9,30 @@ import ProdutoCardSkeleton from './ProdutoCardSkeleton';
 import Filter from './Filter';
 import { useEffect, useMemo, useState } from 'react';
 import { useDebounce } from '@/app/hooks/useDebounce';
+import ProdutosPagination from './ProdutosPagination';
 
 const ProdutosGrid = () => {
   const [searchValue, setSearchValue] = useState('');
   const [order, setOrder] = useState('');
   const debouncedSearch = useDebounce(searchValue, 500);
+  const [actualPage, setActualPage] = useState<number>(1);
+
+  const itemsPerPage = 10;
 
   const { data: produtos = [], isLoading } = useQuery<Produto[], Error>({
     queryKey: ['produtos', debouncedSearch],
     queryFn: async () => {
       try {
-        if (debouncedSearch.trim() !== '') {
-          const res = await api.post('/innova-dinamica/produtos', {
-            search: debouncedSearch,
-          });
-          return res.data;
-        }
-
-        const res = await api.get('/innova-dinamica/produtos');
-        return res.data;
+        const response =
+          debouncedSearch.trim() !== ''
+            ? await api.post('/innova-dinamica/produtos', {
+                search: debouncedSearch,
+              })
+            : await api.get('/innova-dinamica/produtos');
+        return response.data;
       } catch (error: unknown) {
-        let message = 'Erro desconhecido';
-
-        if (error instanceof Error) {
-          message = error.message;
-        }
-
+        const message =
+          error instanceof Error ? error.message : 'Erro desconhecido';
         toast.error(message);
         throw error;
       }
@@ -44,18 +42,40 @@ const ProdutosGrid = () => {
   const sortedProdutos = useMemo(() => {
     const sorted = [...produtos];
 
-    if (order === 'price_asc') {
-      sorted.sort((a, b) => Number(a.preco) - Number(b.preco));
-    } else if (order === 'price_desc') {
-      sorted.sort((a, b) => Number(b.preco) - Number(a.preco));
-    } else if (order === 'name_asc') {
-      sorted.sort((a, b) => a.nome.localeCompare(b.nome));
-    } else if (order === 'name_desc') {
-      sorted.sort((a, b) => b.nome.localeCompare(a.nome));
+    switch (order) {
+      case 'price_asc':
+        sorted.sort((a, b) => Number(a.preco) - Number(b.preco));
+        break;
+      case 'price_desc':
+        sorted.sort((a, b) => Number(b.preco) - Number(a.preco));
+        break;
+      case 'name_asc':
+        sorted.sort((a, b) => a.nome.localeCompare(b.nome));
+        break;
+      case 'name_desc':
+        sorted.sort((a, b) => b.nome.localeCompare(a.nome));
+        break;
     }
 
     return sorted;
   }, [produtos, order]);
+
+  const totalPages = Math.ceil(sortedProdutos.length / itemsPerPage);
+
+  useEffect(() => {
+    setActualPage(1);
+  }, [debouncedSearch, order]);
+
+  useEffect(() => {
+    if (actualPage > totalPages && totalPages > 0) {
+      setActualPage(totalPages);
+    }
+  }, [actualPage, totalPages]);
+
+  const paginatedProdutos = useMemo(() => {
+    const startIndex = (actualPage - 1) * itemsPerPage;
+    return sortedProdutos.slice(startIndex, startIndex + itemsPerPage);
+  }, [sortedProdutos, actualPage]);
 
   return (
     <div className="max-w-10/12 mx-auto">
@@ -74,9 +94,20 @@ const ProdutosGrid = () => {
           ? Array.from({ length: 6 }).map((_, i) => (
               <ProdutoCardSkeleton key={i} />
             ))
-          : sortedProdutos.map((produto) => (
+          : paginatedProdutos.map((produto) => (
               <ProdutoCard key={produto.codigo} produto={produto} />
             ))}
+      </div>
+      <div>
+        {totalPages > 1 && (
+          <div className="mt-8 mb-12 flex justify-center">
+            <ProdutosPagination
+              actualPage={actualPage}
+              setActualPage={setActualPage}
+              totalPages={totalPages}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
