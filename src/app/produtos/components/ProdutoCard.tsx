@@ -4,7 +4,9 @@ import Image from 'next/image';
 import React from 'react';
 import ColorPicker from './ColorPicker';
 import { formatPrice } from '@/utils/formatPrice';
-import { FaDropbox } from 'react-icons/fa';
+import { FaDropbox, FaRegBookmark } from 'react-icons/fa';
+import ProdutoSaveIcon from './ProdutoSaveIcon';
+import useSavedProducts from '@/app/hooks/useSavedProducts';
 
 const ProdutoCard = ({ produto }: { produto: Produto }) => {
   const colorsPicker = [
@@ -23,15 +25,21 @@ const ProdutoCard = ({ produto }: { produto: Produto }) => {
     '#ffaf01',
     '#2e1e41',
   ];
+  const { toggleSaveProduct, isSaved } = useSavedProducts();
 
   return (
-    <div className="flex flex-col justify-between items-center overflow-hidden sm:max-w-[225px] w-full mb-4">
+    <div className="flex flex-col justify-between items-center overflow-hidden flex-grow flex-shrink basis-full md:basis-1/3 lg:basis-1/4 xl:basis-1/5 mb-4 sm:max-w-[312px]">
       <div className="text-center">
         <h2 className="font-bold ">{limitText(produto.nome, 18)}</h2>
         <p className="mb-3">{produto.codigo}</p>
       </div>
       <div className="border-[1px] h-[585px] max-h-[585px] border-gray-400">
         <div className="relative h-[290px]">
+          <ProdutoSaveIcon
+            isSaved={isSaved(produto.codigo)}
+            toggleSaveProduct={toggleSaveProduct}
+            produtoCode={produto.codigo}
+          />
           <div className="bg-[#f9f9f9] top-0 right-0 absolute p-0.5 z-10">
             <span className="uppercase text-[#26b6cd] font-bold">
               Exclusivo!
