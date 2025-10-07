@@ -9,7 +9,7 @@ import { MdEmail } from 'react-icons/md';
 const Header = () => {
   const user: User | string | null = useUserStore((state) => state.user);
   const loadFromStorage = useUserStore((state) => state.loadFromStorage);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
   useEffect(() => {
     loadFromStorage();
@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header className="bg-[#8EC605] py-2 mt-8">
-      <div className="max-w-8/12 flex justify-between items-center mx-auto">
+      <div className="max-w-8/12 flex flex-col md:flex-row justify-between items-center mx-auto">
         <h1 className="sr-only">Innovation Brindes</h1>
         <Image
           src={'/assets/logo_innovation.png'}
@@ -31,7 +31,7 @@ const Header = () => {
           height={66}
           alt="logo Innovation Brindes"
         />
-        <div className="flex justify-center items-center gap-6">
+        <div className="flex flex-col-reverse sm:flex-row justify-center items-center gap-6">
           <div className="relative inline-block">
             <MdEmail className="text-white text-3xl" />
             <span className="absolute -top-1 -right-4 flex items-center justify-center w-5 h-5 text-xs font-bold text-[#8EC605] bg-white rounded-full shadow-md">
