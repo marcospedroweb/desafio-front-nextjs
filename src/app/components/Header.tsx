@@ -5,11 +5,14 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { FaPhone } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
+import { useAuthRedirect } from '../hooks/useAuthRedirect';
 
 const Header = () => {
   const user: User | string | null = useUserStore((state) => state.user);
   const loadFromStorage = useUserStore((state) => state.loadFromStorage);
   const [, setLoading] = useState(true);
+
+  useAuthRedirect();
 
   useEffect(() => {
     loadFromStorage();

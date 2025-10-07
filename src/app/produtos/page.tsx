@@ -1,11 +1,13 @@
-'use client';
-import React from 'react';
-import { useAuthRedirect } from '../hooks/useAuthRedirect';
 import ProdutosGrid from './components/ProdutosGrid';
 import Header from '../components/Header';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Produtos | Innovation Brindes',
+  description: 'Todos os produtos da Innovation Brindes',
+};
 
 export default function ProdutosPage() {
-  useAuthRedirect();
   return (
     <main>
       <Header />
