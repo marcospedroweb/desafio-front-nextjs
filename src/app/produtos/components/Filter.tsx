@@ -28,6 +28,7 @@ const Filter = ({ search, setSearch, order, setOrder }: FilterProps) => {
           <option value="price_desc">Preço decrescente</option>
           <option value="name_asc">Nome A-Z</option>
           <option value="name_desc">Nome Z-A</option>
+          <option value="favorites">Favoritos</option>
         </select>
       </div>
     </div>
