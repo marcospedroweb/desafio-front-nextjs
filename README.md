@@ -1,5 +1,4 @@
-````markdown
-# README
+# Desafio NextJS
 
 ## Passos para rodar
 
@@ -7,7 +6,6 @@
 npm i
 npm run dev
 ```
-````
 
 ## Variáveis de ambiente
 
@@ -19,7 +17,9 @@ npm run dev
 
 ## Screenshots
 
-- Lighthouse Desktop: ![alt text](image.png)
+- Lighthouse Desktop:<br>
+  ![alt text](image.png)
+- Fluxo usuario:<br>
 
 ```
 
