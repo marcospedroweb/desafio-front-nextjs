@@ -43,11 +43,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: 0, message: 'Não autorizado' }, { status: 401 });
     }
 
-    console.log(codigoProduto)
-    console.log(codigoProduto)
-    console.log(codigoProduto)
-    console.log(codigoProduto)
-
     const { data }: { data: Produto[] } = await axios.post('https://apihomolog.innovationbrindes.com.br/api/innova-dinamica/produtos/listar', codigoProduto ? {
       codigo_produto: codigoProduto
     } : {
