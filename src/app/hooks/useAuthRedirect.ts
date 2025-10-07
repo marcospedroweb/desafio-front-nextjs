@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
+import { toast } from "react-toastify";
 export function useAuthRedirect() {
   const router = useRouter();
   const pathname = usePathname();
@@ -13,6 +14,7 @@ export function useAuthRedirect() {
     const isPublicPath = publicPaths.includes(pathname);
 
     if (!token && !isPublicPath) {
+      toast.warning('É necessário realizar o Login para prosseguir.')
       router.replace("/login");
     } else if (token && isPublicPath) {
       router.replace("/products");
