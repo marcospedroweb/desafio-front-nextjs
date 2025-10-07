@@ -3,7 +3,7 @@ import LoginForm from './components/LoginForm';
 
 export const metadata: Metadata = {
   title: 'Login | Innovation Brindes',
-  description: 'Acesse sua conta para gerenciar produtos e pedidos.',
+  description: 'Acesse sua conta para acessar os produtos',
 };
 
 export default function LoginPage() {
