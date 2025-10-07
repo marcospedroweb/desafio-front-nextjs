@@ -10,14 +10,14 @@ export function useAuthRedirect() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const publicPaths = ["/login", "/signup"];
+    const publicPaths = ["/login"];
     const isPublicPath = publicPaths.includes(pathname);
 
     if (!token && !isPublicPath) {
       toast.warning('É necessário realizar o Login para prosseguir.')
       router.replace("/login");
     } else if (token && isPublicPath) {
-      router.replace("/products");
+      router.replace("/produtos");
     } else {
       setChecking(false);
     }

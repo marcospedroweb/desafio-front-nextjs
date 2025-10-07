@@ -37,7 +37,7 @@ const LoginForm = () => {
         });
         navigate.push('/produtos');
       } else {
-        toast.error(data.message);
+        toast.error('Houver algum erro, tente novamente.');
       }
     },
   });
