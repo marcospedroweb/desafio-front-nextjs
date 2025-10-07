@@ -7,6 +7,7 @@ npm i
 npm run build
 npm run start
 ```
+- Configure .env com base no [.env.example](.env.example)
 
 ## Variáveis de ambiente
 
