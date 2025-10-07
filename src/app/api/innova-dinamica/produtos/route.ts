@@ -1,3 +1,4 @@
+import { API_ROUTE } from '@/lib/config';
 import type { Produto } from '@/lib/store';
 import axios from 'axios'
 import { NextRequest, NextResponse } from 'next/server'
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: 0, message: 'Não autorizado' }, { status: 401 });
     }
 
-    const { data }: { data: Produto[] } = await axios.post('https://apihomolog.innovationbrindes.com.br/api/innova-dinamica/produtos/listar', codigoProduto ? {
+    const { data }: { data: Produto[] } = await axios.post(`${API_ROUTE}/produtos/listar`, codigoProduto ? {
       codigo_produto: codigoProduto
     } : {
       nome_produto: search

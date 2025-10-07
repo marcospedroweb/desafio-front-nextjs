@@ -1,3 +1,4 @@
+import { API_ROUTE } from '@/lib/config'
 import axios from 'axios'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -14,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
 
 
-    const { data } = await axios.post('https://apihomolog.innovationbrindes.com.br/api/innova-dinamica/login/acessar', {
+    const { data } = await axios.post(`${API_ROUTE}/login/acessar`, {
       email: username,
       senha: password
     })
