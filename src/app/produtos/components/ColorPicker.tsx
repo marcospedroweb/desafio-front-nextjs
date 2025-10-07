@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 interface ColorPickerProps {
-  colors: string[]; // lista de cores em HEX ou classes Tailwind
+  colors: string[];
   onSelect?: (color: string) => void;
 }
 
