@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ status: 0, message: 'Não autorizado' }, { status: 401 });
     }
 
-    const { data }: { data: Produto[] } = await axios.get('https://apihomolog.innovationbrindes.com.br/api/innova-dinamica/produtos/listar', {
+    const { data }: { data: Produto[] } = await axios.get(`${API_ROUTE}/produtos/listar`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
