@@ -29,7 +29,11 @@ export const useUserStore = create<UserState>((set) => ({
   user: null,
   token: null,
   login: (user, token) => set({ user, token }),
-  logout: () => set({ user: null, token: null }),
+  logout: () => {
+    set({ user: null, token: null })
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+  },
   loadFromStorage: () => {
     const token = localStorage.getItem('token')
     const user = localStorage.getItem('user')
