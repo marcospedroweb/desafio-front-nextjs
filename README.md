@@ -20,6 +20,7 @@ npm run dev
 - Lighthouse Desktop:<br>
   ![alt text](image.png)
 - Fluxo usuario:<br>
+https://youtu.be/r9zVNTiMlpE
 
 ```
 
