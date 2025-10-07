@@ -1,26 +1,25 @@
 'use client';
 import { useState } from 'react';
-import Input from '../components/Input';
+import Input from '../../components/Input';
 import { FaUnlockAlt, FaUser } from 'react-icons/fa';
-import Button from '../components/Button';
+import Button from '../../components/Button';
 import { useUserStore } from '@/lib/store';
 import { useMutation } from '@tanstack/react-query';
 import api from '@/lib/axios';
 import { useRouter } from 'next/navigation';
-import { useAuthRedirect } from '../hooks/useAuthRedirect';
+import { useAuthRedirect } from '../../hooks/useAuthRedirect';
 import { toast } from 'react-toastify';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [stayLogged, setStayLogged] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { login } = useUserStore();
   const navigate = useRouter();
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const res = await api.post('/auth/login', {
+      const res = await api.post('/innova-dinamica/login', {
         username,
         password,
       });
@@ -31,6 +30,7 @@ const LoginForm = () => {
         login(data.dados_usuario, data.token_de_acesso);
         if (stayLogged) {
           localStorage.setItem('token', data.token_de_acesso);
+          localStorage.setItem('user', data.dados_usuario.nome_usuario);
         }
         toast.success('Login realizado com sucesso!', {
           autoClose: 3000,
@@ -95,7 +95,7 @@ const LoginForm = () => {
               text={'Login'}
               className="mt-8"
               type="submit"
-              loading={loading}
+              loading={mutation.isPending}
             />
           </div>
         </div>
