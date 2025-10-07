@@ -13,7 +13,7 @@ const ProdutoSaveIcon = ({
 }: ProdutoSaveIconProps) => {
   return (
     <div
-      className="bg-[#f9f9f9] top-2 left-2 absolute p-0.5 z-10 cursor-pointer"
+      className="top-2 left-2 absolute p-0.5 z-10 cursor-pointer"
       onClick={() => toggleSaveProduct(produtoCode)}
     >
       {isSaved ? (
