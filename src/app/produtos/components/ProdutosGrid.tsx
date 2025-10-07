@@ -3,7 +3,6 @@
 import api from '@/lib/axios';
 import { Produto } from '@/lib/store';
 import { useQuery } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
 import ProdutoCard from './ProdutoCard';
 import ProdutoCardSkeleton from './ProdutoCardSkeleton';
 import Filter from './Filter';
@@ -35,7 +34,7 @@ const ProdutosGrid = () => {
       } catch (error: unknown) {
         const message =
           error instanceof Error ? error.message : 'Erro desconhecido';
-
+        console.error(message);
         throw error;
       }
     },
