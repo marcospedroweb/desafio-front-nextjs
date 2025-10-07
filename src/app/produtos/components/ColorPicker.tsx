@@ -35,10 +35,9 @@ const ColorPicker = ({ colors = colorsPicker, onSelect }: ColorPickerProps) => {
         <button
           key={color}
           onClick={() => handleSelect(color)}
-          style={{ backgroundColor: color }}
           className={`w-6 h-6 rounded-full border-2 border-gray-200 hover:border-black transition-all ${
             selectedColor === color ? 'ring-2 ring-offset-1 ring-black' : ''
-          } cursor-pointer`}
+          } cursor-pointer bg-[${color}]`}
         />
       ))}
     </div>

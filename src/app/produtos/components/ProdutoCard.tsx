@@ -34,8 +34,7 @@ const ProdutoCard = ({ produto }: { produto: Produto }) => {
             src={produto.imagem}
             alt={`Imagem do produto ${produto.nome}`}
             fill
-            style={{ objectFit: 'cover' }}
-            className="z-0"
+            className="z-0 object-cover"
           />
           <div className="absolute left-0 bottom-0 bg-white border-r-[1px] border-y-[1px] border-gray-300 h-[48px] rounded-tr-md">
             <div className="relative pe-2">

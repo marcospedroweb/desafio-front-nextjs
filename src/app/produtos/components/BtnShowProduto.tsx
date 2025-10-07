@@ -69,7 +69,7 @@ const BtnShowProduto = ({ produto }: BtnShowProdutoProps) => {
                 src={produto.imagem}
                 alt={produto.nome}
                 fill
-                style={{ objectFit: 'cover' }}
+                className="object-cover"
               />
             </div>
 
