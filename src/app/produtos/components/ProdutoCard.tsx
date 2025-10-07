@@ -21,9 +21,9 @@ const ProdutoCard = ({ produto }: { produto: Produto }) => {
       <div className="border-[1px] h-[585px] max-h-[585px] border-gray-400">
         <div className="relative h-[290px]">
           <ProdutoSaveIcon
+            produtoCode={produto.codigo}
             isSaved={isSaved(produto.codigo)}
             toggleSaveProduct={toggleSaveProduct}
-            produtoCode={produto.codigo}
           />
           <div className="bg-[#f9f9f9] top-0 right-0 absolute p-0.5 z-10">
             <span className="uppercase text-[#26b6cd] font-bold">

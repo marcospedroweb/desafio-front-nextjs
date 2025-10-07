@@ -1,31 +1,30 @@
 import { useEffect, useState } from 'react';
+import { create } from 'zustand';
 
-const useSavedProducts = () => {
-  const [savedProducts, setSavedProducts] = useState<string[]>([]);
+interface SavedProductsState {
+  savedProducts: string[];
+  toggleSaveProduct: (codigo: string) => void;
+  isSaved: (codigo: string) => boolean;
+}
 
-  useEffect(() => {
-    const saved = localStorage.getItem('savedProducts');
-    if (saved) {
-      setSavedProducts(JSON.parse(saved));
-    }
-  }, []);
+const useSavedProducts = create<SavedProductsState>((set, get) => ({
+  savedProducts: typeof window !== 'undefined' && localStorage.getItem('savedProducts')
+    ? JSON.parse(localStorage.getItem('savedProducts')!)
+    : [],
 
-  const toggleSaveProduct = (codigo: string) => {
-    setSavedProducts((prev) => {
-      let updated: string[];
-      if (prev.includes(codigo)) {
-        updated = prev.filter((c) => c !== codigo);
-      } else {
-        updated = [...prev, codigo];
-      }
-      localStorage.setItem('savedProducts', JSON.stringify(updated));
-      return updated;
-    });
-  };
+  toggleSaveProduct: (codigo: string) => {
+    const prev = get().savedProducts;
+    const updated = prev.includes(codigo)
+      ? prev.filter((c) => c !== codigo)
+      : [...prev, codigo];
 
-  const isSaved = (codigo: string) => savedProducts.includes(codigo);
+    localStorage.setItem('savedProducts', JSON.stringify(updated));
+    set({ savedProducts: updated });
+  },
 
-  return { toggleSaveProduct, isSaved };
-};
+  isSaved: (codigo: string) => {
+    return get().savedProducts.includes(codigo);
+  },
+}));
 
 export default useSavedProducts;
