@@ -10,15 +10,16 @@ interface FilterProps {
 const Filter = ({ search, setSearch, order, setOrder }: FilterProps) => {
   return (
     <div className="mt-6 w-full">
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex flex-col sm:flex-row justify-between items-center">
         <Input
           text="Nome do produto ou código"
-          classNameInput="!w-8/12 !py-3 border !mb-0"
+          classNameDiv="mb-3 sm:mb-0"
+          classNameInput="!w-full sm:!w-8/12 !py-3 border !mb-0 "
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className="w-3/12 bg-white py-3 px-1 rounded-full border"
+          className="w-8/12 sm:w-3/12 bg-white py-3 px-1 rounded-full border"
           value={order}
           onChange={(e) => setOrder(e.target.value)}
         >

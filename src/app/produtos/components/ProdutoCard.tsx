@@ -25,23 +25,24 @@ const ProdutoCard = ({ produto }: { produto: Produto }) => {
   ];
 
   return (
-    <div className="flex flex-col justify-between items-center overflow-hidden max-w-[225px] w-full mb-4">
+    <div className="flex flex-col justify-between items-center overflow-hidden sm:max-w-[225px] w-full mb-4">
       <div className="text-center">
         <h2 className="font-bold ">{limitText(produto.nome, 18)}</h2>
         <p className="mb-3">{produto.codigo}</p>
       </div>
       <div className="border-[1px] h-[585px] max-h-[585px] border-gray-400">
-        <div className="relative">
-          <div className="bg-[#f9f9f9] top-0 right-0 absolute p-0.5">
+        <div className="relative h-[290px]">
+          <div className="bg-[#f9f9f9] top-0 right-0 absolute p-0.5 z-10">
             <span className="uppercase text-[#26b6cd] font-bold">
               Exclusivo!
             </span>
           </div>
           <Image
             src={produto.imagem}
-            width={233}
-            height={290}
             alt={`Imagem do produto ${produto.nome}`}
+            fill
+            style={{ objectFit: 'cover' }}
+            className="z-0"
           />
           <div className="absolute left-0 bottom-0 bg-white border-r-[1px] border-y-[1px] border-gray-300 h-[48px] rounded-tr-md">
             <div className="relative pe-2">
