@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { INTERNAL_API_ROUTE } from './config'
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: INTERNAL_API_ROUTE || '/api',
 })
 
 api.interceptors.request.use((config) => {
