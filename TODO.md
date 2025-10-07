@@ -45,7 +45,7 @@ Next.js style e-commerce/product app (grid de produtos, login, favoritos).
 - [x] Usuário sem token não pode acessar `/produtos`.
 - [x] Busca deve respeitar debounce e filtros aplicados.
 - [x] Favoritos devem ser persistidos localmente e reaparecer após reload.
-- [ ] Modal de detalhe deve manter foco e ser acessível.
+- [x] Modal de detalhe deve manter foco e ser acessível.
 - [x] Paginação/infinite scroll deve carregar lotes corretamente sem duplicar itens.
 
 ---
@@ -69,7 +69,7 @@ Next.js style e-commerce/product app (grid de produtos, login, favoritos).
 
 - [ ] Roteamento protegido com HOC/middleware de auth (Next.js).
 - [ ] Dark mode (toggle, preferências salvas).
-- [ ] Code-splitting: modal carregada sob demanda.
+- [x] Code-splitting: modal carregada sob demanda.
 - [ ] Testes:
   - [ ] 1–2 testes unitários (Vitest/Jest + React Testing Library) para componentes de UI.
   - [ ] 1 smoke E2E (Playwright) validando fluxo: login → ver grid.

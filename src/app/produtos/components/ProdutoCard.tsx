@@ -1,13 +1,18 @@
+'use client';
 import type { Produto } from '@/lib/store';
 import { limitText } from '@/utils/limitText';
 import Image from 'next/image';
 import React from 'react';
 import ColorPicker from './ColorPicker';
 import { formatPrice } from '@/utils/formatPrice';
-import { FaDropbox, FaRegBookmark } from 'react-icons/fa';
+import { FaDropbox } from 'react-icons/fa';
 import ProdutoSaveIcon from './ProdutoSaveIcon';
 import useSavedProducts from '@/app/hooks/useSavedProducts';
-import BtnShowProduto from './BtnShowProduto';
+import dynamic from 'next/dynamic';
+
+const BtnShowProduto = dynamic(() => import('./BtnShowProduto'), {
+  ssr: false,
+});
 
 const ProdutoCard = ({ produto }: { produto: Produto }) => {
   const { toggleSaveProduct, isSaved } = useSavedProducts();
