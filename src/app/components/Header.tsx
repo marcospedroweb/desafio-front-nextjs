@@ -32,7 +32,7 @@ const Header = () => {
       <div className="max-w-10/12 flex flex-col md:flex-row justify-between items-center mx-auto">
         <h1 className="sr-only">Innovation Brindes</h1>
         <Image
-          src={'/assets/logo_innovation.png'}
+          src={'/assets/logo_innovation.webp'}
           width={151}
           height={66}
           alt="logo Innovation Brindes"
