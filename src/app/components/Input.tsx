@@ -1,21 +1,23 @@
 import React, { type InputHTMLAttributes, type ReactNode } from 'react';
 
 interface InputParams extends InputHTMLAttributes<HTMLInputElement> {
-  icon: ReactNode;
+  icon?: ReactNode;
   text: string;
   type?: string;
-  className?: string;
+  classNameDiv?: string;
+  classNameInput?: string;
 }
 
 const Input = ({
   icon,
   text,
   type = 'text',
-  className,
+  classNameDiv,
+  classNameInput,
   ...props
 }: InputParams) => {
   return (
-    <div className={`relative w-full ${className} mb-3`}>
+    <div className={`relative w-full ${classNameDiv}`}>
       {icon && (
         <div className="absolute inset-y-0 left-8 flex items-center pointer-events-none">
           {icon}
@@ -24,7 +26,9 @@ const Input = ({
       <input
         type={type}
         placeholder={text}
-        className={`w-full px-3 py-4 pl-15 rounded-full focus:outline-none focus:ring focus:ring-blue-400 bg-white text-black`}
+        className={`w-full px-3 py-4 ${
+          icon ? 'pl-15' : 'pl-5'
+        } rounded-full focus:outline-none focus:ring focus:ring-blue-400 bg-white text-black ${classNameInput}`}
         {...props}
       />
     </div>
