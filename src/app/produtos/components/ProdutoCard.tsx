@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 import ColorPicker from './ColorPicker';
 import { formatPrice } from '@/utils/formatPrice';
+import { FaDropbox } from 'react-icons/fa';
 
 const ProdutoCard = ({ produto }: { produto: Produto }) => {
   const colorsPicker = [
@@ -30,12 +31,29 @@ const ProdutoCard = ({ produto }: { produto: Produto }) => {
         <p className="mb-3">{produto.codigo}</p>
       </div>
       <div className="border-[1px] h-[585px] max-h-[585px] border-gray-400">
-        <Image
-          src={produto.imagem}
-          width={233}
-          height={290}
-          alt={`Imagem do produto ${produto.nome}`}
-        />
+        <div className="relative">
+          <div className="bg-[#f9f9f9] top-0 right-0 absolute p-0.5">
+            <span className="uppercase text-[#26b6cd] font-bold">
+              Exclusivo!
+            </span>
+          </div>
+          <Image
+            src={produto.imagem}
+            width={233}
+            height={290}
+            alt={`Imagem do produto ${produto.nome}`}
+          />
+          <div className="absolute left-0 bottom-0 bg-white border-r-[1px] border-y-[1px] border-gray-300 h-[48px] rounded-tr-md">
+            <div className="relative pe-2">
+              <FaDropbox className="absolute left-0 -top-3 text-[#8EC605] text-5xl bg-white rounded-tr-md px-0.5" />
+              <span className="text-gray-500 text-[12px] ps-[55px] font-bold ">
+                com embalagem
+                <span className="block ps-[55px]">especial</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
         <div className="p-2 flex flex-wrap justify-between flex-1 gap-4">
           <p className="mb-2 min-h-[72px]">{limitText(produto.descricao)}</p>
           <div className="flex flex-col justify-end">
